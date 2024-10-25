@@ -23,8 +23,8 @@ class PlayList(LinkedList):
         """Перейти к следующему треку."""
         if self.current_item is None:
             raise ValueError("Не выбран начальный трек")
-        if self.current_item.next_item:
-            self.current_item = self.current_item.next_item
+        if self.current_item.next:
+            self.current_item = self.current_item.next
             pygame.mixer.music.load(self.current_item.data.file_path)
             pygame.mixer.music.play()
             print(f"Играет трек: {self.current_item.data.title}")
@@ -50,7 +50,7 @@ class PlayList(LinkedList):
                     print("Достигнут начало плейлиста")
                     return
             previous = current
-            current = current.next_item
+            current = current.next
 
     @property
     def current(self):
@@ -63,7 +63,7 @@ class PlayList(LinkedList):
         """Добавить трек в плейлист."""
         composition = Composition(file_path, title, artist)
         self.compositions.append(composition)
-        print(f"Трек '{file_path}' добавлен в плейлист")
+        print(f"Трек '{file_path}' добавлен в плейлист {self.name}")
 
     def play_stop(self):
         """Play/Stop текущий трек."""
@@ -71,8 +71,6 @@ class PlayList(LinkedList):
             pygame.mixer.music.pause()
         else:
             if self.current_item:
-                # pygame.mixer.music.load(self.current_item.data.file_path)
-                # pygame.mixer.music.play()
                 pygame.mixer.music.unpause()
             else:
                 print("Не выбран начальный трек")
@@ -82,7 +80,7 @@ class PlayList(LinkedList):
         if track_index >= 0:
             current = self.compositions.head
             for i in range(track_index):
-                current = current.next_item
+                current = current.next
             self.current_item = current
             pygame.mixer.music.load(self.current_item.data.file_path)
             pygame.mixer.music.play()
@@ -93,6 +91,8 @@ class PlayList(LinkedList):
         current = self.compositions.head
         while current:
             track_list.append(current.data.file_path)
-            current = current.next_item
+            current = current.next
         return track_list
+
+
 

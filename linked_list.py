@@ -12,15 +12,15 @@ class LinkedList:
         self.head = None
         self.tail = None
 
-    def append(self, item):
-        """Добавление элемента в конец списка."""
-        new_node = LinkedListItem(item)
-        if self.head is None:
-            self.head = new_node
-            self.tail = new_node
-        else:
-            self.tail.next_item = new_node
-            self.tail = new_node
+    # def append(self, item):
+    #     """Добавление элемента в конец списка."""
+    #     new_node = LinkedListItem(item)
+    #     if self.head is None:
+    #         self.head = new_node
+    #         self.tail = new_node
+    #     else:
+    #         self.tail.next_item = new_node
+    #         self.tail = new_node
 
     def append_left(self, item):
         """Добавление элемента в начало списка."""
@@ -40,9 +40,9 @@ class LinkedList:
             current = current.next
         current.next = new_node
 
-    # def append(self, item):
-    #     """Алиас для append_right."""
-    #     self.append_right(item)
+    def append(self, item):
+        """Алиас для append_right."""
+        self.append_right(item)
 
     def remove(self, item):
         """Удаление элемента. Возбуждает ValueError, если элемент отсутствует."""
